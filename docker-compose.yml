@@ -1,0 +1,22 @@
+# One command runs Redis and the whole analysis:
+#     docker compose up --build --abort-on-container-exit
+# The reports appear in ./results on the host.
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  analytics:
+    build: .
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - ./results:/app/results

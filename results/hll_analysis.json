@@ -1,0 +1,8 @@
+{
+  "day": "2024-10-26",
+  "true_unique_count": 500000,
+  "hll_unique_count": 506483,
+  "error_rate_percentage": 1.2966,
+  "hll_memory_usage_bytes": 14408,
+  "set_memory_usage_bytes": 24194448
+}
